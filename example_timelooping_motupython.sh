@@ -4,7 +4,7 @@
 # This example shows a time-looping way to download data from Mercator Forecast PHY Ocean Model 
 # It can be used for any other data available in CMEMS: 
 # http://marine.copernicus.eu/services-portfolio/access-to-products/
-# More information in: 
+# More information at: 
 # http://marine.copernicus.eu/faq/what-are-the-motu-and-python-requirements/
 # https://github.com/clstoulouse/motu-client-python
 # -------------------------------------------------------------------------------
