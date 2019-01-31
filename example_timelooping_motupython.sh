@@ -19,12 +19,9 @@ FILENAME="nest_"
 IFS=''
 
 # Initiate loop to download data based on daily outputs
-for y in 2015 2016 2017
-do
-for m in  01 02 03 04 05 06 07 08 09 10 11 12
-do
-for d in  01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-do
+for y in {2015..2017}; do 
+for m in     {01..12}; do printf -v m "%02d" $m;
+for d in     {01..31}; do printf -v d "%02d" $d;
 
 # Defining individual filenames from source
 ti=''$y'-'$m'-'$d' 12:00:00'
