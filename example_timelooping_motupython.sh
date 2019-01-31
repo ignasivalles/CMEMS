@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # -------------------------------------------------------------------------------
-# This example shows a time-looping way to download data from Mercator Forecast PHY Ocean Model 
+# This example shows a time-looping method to download data from Mercator Forecast PHY Ocean Model 
 # It can be used for any other data available in CMEMS: 
 # http://marine.copernicus.eu/services-portfolio/access-to-products/
 # More information at: 
