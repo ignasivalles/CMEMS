@@ -15,31 +15,26 @@ CMEMS_PWD="password"
 
 # Define your output directory where daily .nc files will be saved. Choose also a file name.
 OUTPUT_DIR="/your/output/directory"
-FILENAME="nest_"
-IFS=''
+
 
 # Initiate loop to download data based on daily outputs
-for y in {2015..2017}; do 
-for m in     {01..12}; do printf -v m "%02d" $m;
-for d in     {01..31}; do printf -v d "%02d" $d;
 
-# Defining individual filenames from source
-ti=''$y'-'$m'-'$d' 12:00:00'
-tf=''$y'-'$m'-'$d' 12:00:00'
+startdate=20211101
+enddate=20220530
 
-# Define your output individual filename
-tname=''$y''$m''$d'000000'
+d=
+n=0
 
-# Download Loop 
-python /home/yourmotupythonfolder/motu-client-python-V16/motu-client.py --user $CMEMS_USERNAME --pwd $CMEMS_PWD
---motu http://nrt.cmems-du.eu/motu-web/Motu --service-id GLOBAL_ANALYSIS_FORECAST_PHY_001_024-TDS
---product-id global-analysis-forecast-phy-001-024
---longitude-min -30 --longitude-max -5 --latitude-min 5 --latitude-max 44 --date-min $ti --date-max $tf
---depth-min 0.493 --depth-max 109.7294 --variable thetao --variable so --variable uo --variable vo
---out-dir $OUTPUT_DIR --out-name "$FILENAME"_"$tname".nc
+until [ "$d" = "$enddate" ]
+do
 
+((n++))
+d=$(date -d "$startdate + $n days" +%Y-%m-%d)
+ti=''$d' 00:30:00'
+tf=''$d' 23:30:00'
+tname=''$d'.nc'
 echo $ti
-done
-done
-done
-                                                                                                                                                            
+
+python -m motuclient --motu https://nrt.cmems-du.eu/motu-web/Motu --service-id GLOBAL_ANALYSIS_FORECAST_PHY_001_024-TDS --product-id cmems_mod_glo_phy_anfc_merged-uv_PT1H-i --longitude-min -50 --longitude-max 15 --latitude-min -15 --latitude-max 15 --date-min $ti --date-max $tf --depth-min 0.494 --depth-max 0.4941 --variable uo --variable utide --variable utotal --variable vo --variable vsdx --variable vsdy --variable vtide --variable vtotal --out-dir $OUTPUT_DIR --out-name $tname --user ivalles --pwd 3cants3roses
+
+done                                                                                                                                              
